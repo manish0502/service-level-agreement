@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration_WanderLust</title>
+</head>
+<body>
+    <form action="{%url 'register' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="company_name" placeholder="company_name"><br>
+        <input type="email" name="email" placeholder="email"><br>
+        <input type="text" name="contact_person" placeholder="contact person"><br>
+        <input type="text" name="mobile" placeholder="mobile"><br>
+        <input type="password" name="password1" placeholder="Password"><br>
+        <input type="password" name="password2" placeholder="Confirm Password"><br>
+        <input type="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+{%load static%}
+<head>
+	<meta charset="utf-8">
+	<title>KPI</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/nunito-font.css' %}">
+	<!-- Main Style Css -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script>
+function validateForm() {
+  var x = document.forms["sla"]["name"].value;
+  if (x == "") {
+    alert("field must be filled out");
+    return false;
+  }
+}
+</script>
+</head>
+<body class="form-v9">
+	<div class="page-content">
+		<div class="form-v9-content" style="background-image: url('{% static 'add-SLA/colorlib-regform-35/images/7p.png' %}')">
+			<form class="form-detail" onsubmit="return validateForm()" action="{% url 'add_kpi' %}" method="post">
+            {% csrf_token %}
+				{% if sucess %}
+				<h4 style="color: green">{{ sucess}}</h4>
+				{%endif%}
+				<h2>Key Performance Indicator</h2>
+				<div class="container-fluids">
+						<div class="dropdown dropright">
+							
+					<div class="form-group">
+							<div class="row">
+									<div class="col-sm-3">
+									  
+		
+							<label for="usr">SLA NUMBER :</label></div>
+							<div class="col-sm-6">
+									<div class="dropdown dropright">
+								<button type="button" class="btn btn-outline-dark" data-toggle="dropdown">
+
+                                      <select name="sla_number">
+                                      	 <option>ADD SLA</option>
+                                            {% for kpi in sla %}
+                                <option value="{{ kpi.sla_number }}">{{ kpi.sla_name }}- {{ kpi.sla_number }}</option>
+
+
+
+                                    {% endfor %}
+                                      </select>
+
+                                    </button>
+								</div>
+							</div>
+					</div>
+					</div>
+				</div>
+					<p></p><br>
+					
+					<div class="form-group">
+							<div class="row">
+									<div class="col-sm-3">
+									  
+		
+							<label for="usr">KPI reading :</label></div>
+							<div class="col-sm-6">
+							<input type="text"  name="kpi_read" class="form-control" id="usr" required></div>
+					</div>
+					<p></p><br>
+                    
+					<div class="form-group">
+							<div class="row">
+									<div class="col-sm-3">
+									  
+		
+							<label for="usr">add next KPI :</label></div>
+							<div class="col-sm-6">
+									<div class="dropdown dropright">
+								<button type="button" class="btn btn-outline-dark" data-toggle="dropdown">
+                                      <select name="next_kpi">
+                                      	 <option>NEXT SLA</option>
+                                           <option value="volvo">Volvo</option>
+                                           <option value="saab">Saab</option>
+                                           <option value="fiat">Fiat</option>
+                                           <option value="audi">Audi</option>
+                                      </select>
+
+                                    </button>
+
+										<p></p><br>
+							<div class="form-row-last">
+								<input type="submit" name="register" class="register" value="submit">
+							</div>
+					</div>
+					</div>
+				
+					
+						</form>
+			<p></p><br>
+        <div class="text-center">
+          <a style="color: #ffffff;font-size: medium" class="d-block small mt-3" href="{%url 'customer_home' %}">Home</a>
+
+        </div>
+                    </div>
+	</div>
+</body>
+</html>

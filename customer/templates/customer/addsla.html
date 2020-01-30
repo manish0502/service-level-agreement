@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<meta charset="utf-8">
+	<title>SLA</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/nunito-font.css' %}">
+	<!-- Main Style Css -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script language="javascript">
+var i = 2;
+function changeIt()
+{
+my_div.innerHTML = my_div.innerHTML +"<br>Rule "+i+ "<br>Min: <input type='text' name='min"+ i+"'>"
+my_div.innerHTML = my_div.innerHTML +"&nbsp; &nbsp; &nbsp; Max:<input type='text' name='max"+ i+"'>"
+my_div.innerHTML = my_div.innerHTML +"&nbsp; &nbsp; &nbsp; %<input type='text' name='percentage"+ i+"' required>"
+i=i+1;
+
+}
+function hiddeninput() {
+    document.getElementById("hidden").value =i-1;
+}
+</script>
+    <script>
+function validateForm() {
+  var x = document.forms["sla"]["name"].value;
+  if (x == "") {
+    alert("All Details must be filled out");
+    return false;
+  }
+}
+</script>
+</head>
+<body class="form-v9">
+	<div class="page-content">
+		<div class="form-v9-content" style="background-image: url('{% static 'images/u.jpeg' %}')">
+			<form class="form-detail" name="sla" onsubmit="return validateForm()" action="{% url 'addsla' %}" method="post">
+             {% csrf_token %}
+				<h2>Service Level Agreements</h2>
+				<div class="container-fluids">
+						<div class="dropdown dropright">
+							
+					<div class="form-group">
+							<div class="row">
+									<div class="col-sm-3">
+									  
+		
+							<label for="usr">NAME OF VENDORS</label></div>
+							<div class="col-sm-6">
+									<div class="dropdown dropright">
+{#								<button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown">#}
+{#								List of Vendors#}
+{#								</button>#}
+                                        <select  name="name">
+                                 <option value="{{ vendors.id }}">List of vendors</option>
+                                     {% for vendor in vendors %}
+                                <option value="{{ vendor.company_name }}">{{ vendor.company_name }}</option>
+
+
+
+                                    {% endfor %}
+                                 </select>
+
+								<div class="dropdown-menu">
+
+
+								  <h5 class="dropdown-header"></h5>
+
+								</div>
+							</div>
+					</div>
+					</div>
+					<p></p><br>
+					
+					<div class="form-group">
+							<div class="row">
+									<div class="col-sm-3">
+                                        {% if error %}
+                                           <h4 style="color: red"> {{ error }}</h4>
+                                        {% endif %}
+									<label for="usr">SLA NUMBER :</label></div>
+							<div class="col-sm-6">
+							<input type="text" name="sla_number" class="form-control" id="usr"></div>
+					</div>
+					<p></p><br>
+                    <div class="form-group">
+							<div class="row">
+							<div class="col-sm-3">
+							<label for="usr">SLA NAME :</label></div>
+							<div class="col-sm-6">
+							<input type="text" name="sla_name" class="form-control" id="usr"></div>
+					</div>
+                    <p></p><br>
+
+					<div class="dropdown dropright">
+						
+						
+							<button type="button" class="btn btn-outline-light>
+							</button>
+							<div class="dropdown-menu">
+
+
+							  <select name="sla">
+                                   <option>Key Performance Indicator</option>
+                                     <option value="service uptime">Service Uptime</option>
+
+
+                              </select>
+							 
+							</div>
+                        </button>
+						</div>
+						<p></p><br>
+						<div class="form-group">
+								<div class="row">
+										<div class="col-sm-3">
+								<label for="usr">NUMBER OF RULE</label></div>
+								<div class="col-sm-6">
+								Rule 1 <br> Min:<input type="text" name="min1">  Max:<input type="text" name="max1"> %<input type="text" name="percentage1">
+
+                                 <div id="my_div"></div>
+                                 <input class="register" type="button" value="Add rule" onClick="changeIt()">
+						</div>
+
+						<div class="form-row-last">
+                            <input type="text" value="" id="hidden" hidden name="no_of_rules">
+								<input type="submit" name="register" onClick="hiddeninput()" class="register" value="submit">
+							</div>
+						</div>
+						</form>
+        <div class="text-center">
+          <a style="color: #ffffff;font-size: medium" class="d-block small mt-3" href="{%url 'customer_home' %}">Home</a>
+
+        </div>
+                    </div>
+	</div>
+</body>
+</html>
